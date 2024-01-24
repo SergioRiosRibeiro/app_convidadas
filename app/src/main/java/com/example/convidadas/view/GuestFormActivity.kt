@@ -30,5 +30,3 @@ class GuestFormActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 }
-
-//Criar ViewModel e ViewBinding e o layout correspondente
