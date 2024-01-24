@@ -1,4 +1,7 @@
 package com.example.convidadas
 
-class GuestFormViewModel {
+import androidx.lifecycle.ViewModel
+
+class GuestFormViewModel: ViewModel() {
+
 }
