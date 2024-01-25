@@ -1,8 +1,9 @@
-package com.example.convidadas
-import androidx.lifecycle.ViewModel
+package com.example.convidadas.viewmodel
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
+import com.example.convidadas.repository.GuestRepository
 
-class GuestFormViewModel: ViewModel() {
+class GuestFormViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val repository = GuestRepository.getInstance()
-
+    private val repository = GuestRepository.getInstance(application)
 }

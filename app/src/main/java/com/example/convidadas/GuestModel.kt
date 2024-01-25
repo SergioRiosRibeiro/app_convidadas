@@ -1,4 +1,3 @@
 package com.example.convidadas
 
-class GuestModel {
-}
+data class GuestModel(val id: Int, var name: String, var presence: Boolean)
