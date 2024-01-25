@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.convidadas.viewmodel.GuestFormViewModel
 import com.example.convidadas.R
 import com.example.convidadas.databinding.ActivityGuestFormBinding
+import com.example.convidadas.model.GuestModel
 
 class GuestFormActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -26,8 +27,13 @@ class GuestFormActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     override fun onClick(v: View) {
-        if(v.id == R.id.button_save) {
-            Toast.makeText(this@GuestFormActivity, "Você clicou no botão salvar", Toast.LENGTH_LONG).show()
+        if (v.id == R.id.button_save) {
+            val name = binding.editName.text.toString()
+            val presence = binding.radioPresent.isChecked
+
+            //passando 0 como padrão pro id. Depois ver o que acontece
+            val model = GuestModel(0, name, presence)
+            viewModel.insert(model)
         }
     }
 }
