@@ -27,10 +27,10 @@ class AllGuestsFragment : Fragment() {
         viewModel = ViewModelProvider(this).get(AllGuestsViewModel::class.java)
         _binding = FragmentAllGuestsBinding.inflate(inflater, container, false)
 
-        // Layout
+        // Layout do recycler
         binding.recyclerAllGuests.layoutManager = LinearLayoutManager(context)
 
-        // Adapter
+        // Adapter do recycler
         binding.recyclerAllGuests.adapter = adapter
 
         val listener = object : OnGuestListener {
@@ -54,11 +54,14 @@ class AllGuestsFragment : Fragment() {
 
         adapter.attachListener(listener)
 
-        viewModel.getAll()
-
         observ()
 
         return binding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.getAll()
     }
 
     private fun observ() {
