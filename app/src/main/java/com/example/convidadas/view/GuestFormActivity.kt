@@ -38,8 +38,8 @@ class GuestFormActivity : AppCompatActivity(), View.OnClickListener {
             val presence = binding.radioPresent.isChecked
 
             //passando 0 como padrão pro id. Depois ver o que acontece
-            val model = GuestModel(guestId, name, presence)
-            viewModel.save(model)
+
+            viewModel.save(guestId, name, presence)
         }
     }
 
@@ -54,10 +54,12 @@ class GuestFormActivity : AppCompatActivity(), View.OnClickListener {
         })
 
         viewModel.saveGuest.observe(this, Observer {
-            if(it.succes) {
-                Toast.makeText(applicationContext, it.message, Toast.LENGTH_SHORT).show()
-                finish()
+            if (it) {
+                Toast.makeText(applicationContext, "Sucesso", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(applicationContext, "Falha", Toast.LENGTH_SHORT).show()
             }
+            finish()
         })
     }
 

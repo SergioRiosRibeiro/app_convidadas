@@ -5,33 +5,30 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.convidadas.constants.DataBaseConstants
 import com.example.convidadas.databinding.FragmentAllGuestsBinding
 import com.example.convidadas.view.adapter.GuestsAdapter
 import com.example.convidadas.view.listener.OnGuestListener
-import com.example.convidadas.viewmodel.AllGuestsViewModel
+import com.example.convidadas.viewmodel.GuestsViewModel
 
 class AllGuestsFragment : Fragment() {
 
     private var _binding: FragmentAllGuestsBinding? = null
     private val binding get() = _binding!!
-    private lateinit var viewModel: AllGuestsViewModel
+    private lateinit var viewModel: GuestsViewModel
     private val adapter = GuestsAdapter()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, b: Bundle?): View {
-        viewModel = ViewModelProvider(this).get(AllGuestsViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(GuestsViewModel::class.java)
         _binding = FragmentAllGuestsBinding.inflate(inflater, container, false)
 
         // Layout do recycler
-        binding.recyclerAllGuests.layoutManager = LinearLayoutManager(context)
-
+        binding.recyclerGuests.layoutManager = LinearLayoutManager(context)
         // Adapter do recycler
-        binding.recyclerAllGuests.adapter = adapter
+        binding.recyclerGuests.adapter = adapter
 
         val listener = object : OnGuestListener {
             override fun onClick(id: Int) {
@@ -51,9 +48,7 @@ class AllGuestsFragment : Fragment() {
                 viewModel.getAll()
             }
         }
-
         adapter.attachListener(listener)
-
         observ()
 
         return binding.root
