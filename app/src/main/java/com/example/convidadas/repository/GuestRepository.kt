@@ -1,22 +1,39 @@
 package com.example.convidadas.repository
 
 import android.content.Context
+import com.example.convidadas.model.GuestModel
 
-class GuestRepository private constructor(context: Context) {
+class GuestRepository(context: Context) {
 
-    private val guestDataBase = GuestDataBase(context)
+    private val guestDataBase = GuestDataBase.getDataBase(context).guestDAO()
 
-    //Singleton -> Acesso assíncrono. Controla acessos à instâncias da classe. Importante p.ex. p/ BD's
+    fun save(guest: GuestModel): Boolean {
+        return guestDataBase.insert(guest) > 0
+    }
 
-    companion object {
-        private lateinit var repository: GuestRepository
+    fun update(guest: GuestModel): Boolean {
+        return guestDataBase.update(guest) > 0
+    }
 
-        fun getInstance(context: Context): GuestRepository {
-            if (!Companion::repository.isInitialized) {
-                repository = GuestRepository(context)
-            }
-            return repository
-        }
+    fun delete(id: Int) {
+        val guest = get(id)
+        guestDataBase.delete(guest)
+    }
+
+    fun get(id: Int): GuestModel {
+        return guestDataBase.get(id)
+    }
+
+    fun getAll(): List<GuestModel> {
+        return guestDataBase.getAll()
+    }
+
+    fun getPresent(): List<GuestModel> {
+        return guestDataBase.getPresent()
+    }
+
+    fun getAbsent(): List<GuestModel> {
+        return guestDataBase.getAbsent()
     }
 
 }
